@@ -1,0 +1,15 @@
+{
+  "keywordsRecruitment": ["招聘", "应聘", "岗位", "引进人才", "诚聘", "招募人才", "教师招聘", "博士后招聘", "人才招聘"],
+  "keywordsHigh": ["外国语言文学", "外文学院", "大学英语", "英语教学部", "外语", "英语", "翻译", "法语", "日语", "韩语", "朝鲜语", "西班牙语", "德语", "俄语"],
+  "keywordsMid": ["语言", "国际交流", "区域国别", "国别学", "文学"],
+  "sources": [
+    {"id": "dfll", "label": "外文学院", "kind": "notice", "home": "https://dfll.fudan.edu.cn/27751/list.htm", "priorityDefault": "high"},
+    {"id": "cec", "label": "大英部", "kind": "notice", "home": "https://cec.fudan.edu.cn/23080/list.htm", "priorityDefault": "high"},
+    {"id": "hr-faculty", "label": "人事处-教学科研", "kind": "jobs", "home": "https://hr.fudan.edu.cn/15364/list.htm", "priorityDefault": "low"},
+    {"id": "hr-postdoc", "label": "人事处-博士后", "kind": "jobs", "home": "https://hr.fudan.edu.cn/15369/list.htm", "priorityDefault": "low"},
+    {"id": "hr-support", "label": "人事处-教辅支撑", "kind": "jobs", "home": "https://hr.fudan.edu.cn/15365/list.htm", "priorityDefault": "low"},
+    {"id": "hr-admin", "label": "人事处-党政管理", "kind": "jobs", "home": "https://hr.fudan.edu.cn/15366/list.htm", "priorityDefault": "low"},
+    {"id": "hr-dispatch", "label": "人事处-派遣制", "kind": "jobs", "home": "https://hr.fudan.edu.cn/15370/list.htm", "priorityDefault": "low"},
+    {"id": "zp", "label": "人才招聘系统", "kind": "portal", "home": "https://zp.fudan.edu.cn", "priorityDefault": "high", "loginRequired": true}
+  ]
+}
