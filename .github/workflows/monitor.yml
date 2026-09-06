@@ -1,0 +1,45 @@
+name: monitor
+
+on:
+  schedule:
+    - cron: "0 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Scrape official lists
+        run: python3 scripts/scrape.py
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/jobs.json data/alerts.md || true
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "chore: refresh Fudan job listings"
+            git push
+          fi
+      - name: Open issue for new high-priority jobs
+        if: hashFiles('data/alerts.md') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(cat data/alerts.md)
+          gh issue list --search "高优先级招聘 in:title state:open" --json number --jq '.[].number' > /tmp/open.txt || true
+          if [ ! -s /tmp/open.txt ]; then
+            gh issue create --title "新的高优先级招聘（外文/大英）" --body "$BODY"
+          else
+            NUM=$(head -n1 /tmp/open.txt)
+            gh issue comment "$NUM" --body "$BODY"
+          fi
