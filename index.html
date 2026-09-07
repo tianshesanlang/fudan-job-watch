@@ -4,74 +4,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>复旦招聘监测台</title>
+  <meta name="description" content="循检外文学院、大英部、人事处与 zp.fudan.edu.cn 的官方招聘信息" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #0b2a4a;
-      --navy-2: #143a63;
-      --gold: #c4a35a;
-      --gold-2: #e8d5a3;
-      --ink: #1c2430;
-      --muted: #5b6573;
-      --paper: #f6f1e6;
-      --card: #fffcf7;
-      --line: #e4d9c5;
-      --high: #b42318;
-      --mid: #b54708;
-      --low: #667085;
-      --ok: #067647;
+      --navy: #0b2a4a; --navy-2: #143a63; --gold: #c4a35a; --gold-2: #e8d5a3;
+      --ink: #1c2430; --muted: #5b6573; --paper: #f4efe4; --card: #fffcf7;
+      --line: #e4d9c5; --high: #b42318; --mid: #b54708; --low: #667085; --ok: #067647;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Noto Sans SC", system-ui, sans-serif; }
     a { color: inherit; }
+    button { font: inherit; }
     .hero {
       background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 55%, #1c4f7a 100%);
-      color: #f7f2e8;
-      padding: 48px 24px 36px;
-      border-bottom: 6px solid var(--gold);
+      color: #f7f2e8; padding: 44px 24px 32px; border-bottom: 6px solid var(--gold);
     }
-    .wrap { max-width: 1120px; margin: 0 auto; }
-    .kicker { letter-spacing: .22em; font-size: 12px; color: var(--gold-2); text-transform: uppercase; }
-    h1 { font-family: "Noto Serif SC", serif; font-size: clamp(28px, 4vw, 42px); margin: 10px 0 8px; font-weight: 700; }
-    .sub { max-width: 720px; color: #d7deea; line-height: 1.7; font-size: 15px; }
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+    .wrap { max-width: 1140px; margin: 0 auto; }
+    .kicker { letter-spacing: .22em; font-size: 11px; color: var(--gold-2); text-transform: uppercase; }
+    h1 { font-family: "Noto Serif SC", serif; font-size: clamp(26px, 4vw, 40px); margin: 10px 0 8px; }
+    .sub { max-width: 740px; color: #d7deea; line-height: 1.75; font-size: 15px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
     .stat { background: rgba(255,255,255,.08); border: 1px solid rgba(232,213,163,.25); padding: 14px 16px; border-radius: 12px; }
     .stat b { display: block; font-size: 26px; font-family: "Noto Serif SC", serif; color: var(--gold-2); }
     .stat span { font-size: 12px; color: #c9d4e3; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 22px 0 8px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 22px 0 10px; align-items: center; }
     .chip {
       border: 1px solid var(--line); background: var(--card); color: var(--muted);
       padding: 7px 12px; border-radius: 999px; cursor: pointer; font-size: 13px;
     }
     .chip.on { background: var(--navy); color: #fff; border-color: var(--navy); }
     .search {
-      width: 100%; max-width: 360px; margin-left: auto; border: 1px solid var(--line);
+      width: 100%; max-width: 280px; margin-left: auto; border: 1px solid var(--line);
       background: var(--card); border-radius: 10px; padding: 10px 12px; font: inherit;
     }
-    .grid { display: grid; grid-template-columns: 1.4fr .8fr; gap: 22px; padding: 8px 0 48px; }
+    .grid { display: grid; grid-template-columns: 1.45fr .78fr; gap: 22px; padding: 8px 0 56px; }
     .list { display: grid; gap: 12px; }
     .card {
       background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-      padding: 18px 18px 14px; box-shadow: 0 8px 24px rgba(11,42,74,.04);
+      padding: 18px; box-shadow: 0 8px 24px rgba(11,42,74,.04);
     }
     .card.high { border-left: 4px solid var(--high); }
     .card.mid { border-left: 4px solid var(--gold); }
-    .meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .card.low { border-left: 4px solid #c9d0da; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 8px; align-items: center; }
     .tag { padding: 2px 8px; border-radius: 999px; background: #efe7d6; }
     .tag.high { background: #fde8e6; color: var(--high); }
     .tag.mid { background: #fef0c7; color: var(--mid); }
     .tag.new { background: #d1fadf; color: var(--ok); }
-    h2.job { font-size: 18px; margin: 0 0 8px; line-height: 1.45; font-family: "Noto Serif SC", serif; }
+    .star { margin-left: auto; cursor: pointer; border: 0; background: none; font-size: 16px; color: #c4b59a; }
+    .star.on { color: var(--gold); }
+    h2.job { font-size: 17px; margin: 0 0 8px; line-height: 1.45; font-family: "Noto Serif SC", serif; }
     h2.job a { text-decoration: none; }
     h2.job a:hover { color: var(--navy-2); text-decoration: underline; }
-    .sum { color: var(--muted); font-size: 14px; line-height: 1.7; }
-    .foot { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; font-size: 13px; color: var(--navy); }
-    .side .card { position: sticky; top: 16px; }
-    .side h3 { margin: 0 0 10px; font-family: "Noto Serif SC", serif; }
-    .side ol { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.7; font-size: 14px; }
-    .src a { color: var(--navy); }
+    .sum { color: var(--muted); font-size: 14px; line-height: 1.7; margin: 0; }
+    .foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 12px; font-size: 13px; color: var(--navy); }
+    .side .card { margin-bottom: 12px; }
+    .side h3 { margin: 0 0 10px; font-family: "Noto Serif SC", serif; font-size: 16px; }
+    .side ol, .side ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.75; font-size: 14px; }
+    .src a, .side a { color: var(--navy); }
     .empty { padding: 40px; text-align: center; color: var(--muted); }
+    .banner {
+      background: #fff7e8; border: 1px solid #ead7a4; border-radius: 14px;
+      padding: 14px 16px; margin-top: 8px; font-size: 14px; line-height: 1.7;
+    }
+    .banner strong { color: var(--high); }
+    .copy { cursor: pointer; border: 0; background: none; color: var(--navy); text-decoration: underline; font: inherit; padding: 0; }
+    footer { padding: 0 24px 40px; color: var(--muted); font-size: 12px; text-align: center; }
     @media (max-width: 860px) {
       .stats { grid-template-columns: 1fr 1fr; }
       .grid { grid-template-columns: 1fr; }
@@ -82,21 +82,24 @@
 <body>
   <header class="hero">
     <div class="wrap">
-      <div class="kicker">Fudan University · Official Sources</div>
+      <div class="kicker">Fudan University · Official Sources Only</div>
       <h1>复旦招聘监测台</h1>
-      <p class="sub">官方「通知公告」与人事处栏目自动循检。优先外国语言文学学院、大学英语教学部；同步全校教学科研与博士后。新岗位会推送到 Grok / 邮箱与 GitHub Issue。</p>
+      <p class="sub">自动循检外文学院、大英部「通知公告」与人事处栏目。新岗位推送到 Grok / 邮箱 / Notion / GitHub Issue。申报以 <a href="https://zp.fudan.edu.cn" target="_blank" rel="noreferrer" style="color:var(--gold-2)">zp.fudan.edu.cn</a> 为准。</p>
       <div class="stats">
         <div class="stat"><b id="nAll">—</b><span>当前岗位</span></div>
         <div class="stat"><b id="nHigh">—</b><span>高优先（对口）</span></div>
-        <div class="stat"><b id="nNew">—</b><span>本轮新增</span></div>
+        <div class="stat"><b id="nSaved">—</b><span>已收藏</span></div>
         <div class="stat"><b id="nUpdated">—</b><span>最近更新</span></div>
       </div>
     </div>
   </header>
   <main class="wrap">
+    <div class="banner" id="focus"></div>
     <div class="toolbar">
       <button class="chip on" data-f="all">全部</button>
       <button class="chip" data-f="high">高-对口</button>
+      <button class="chip" data-f="mid">中-相关</button>
+      <button class="chip" data-f="saved">收藏</button>
       <button class="chip" data-f="dfll">外文学院</button>
       <button class="chip" data-f="cec">大英部</button>
       <button class="chip" data-f="hr-faculty">教学科研</button>
@@ -110,63 +113,112 @@
           <h3>申请要点</h3>
           <ol>
             <li>多数教学科研岗要求<strong>博士</strong>。</li>
-            <li>官方申报入口：<a href="https://zp.fudan.edu.cn" target="_blank" rel="noreferrer">zp.fudan.edu.cn</a>（需登录）。</li>
-            <li>外文学院：<code>fdwwhr@fudan.edu.cn</code> / 021-65642690。</li>
+            <li>官方申报：<a href="https://zp.fudan.edu.cn" target="_blank" rel="noreferrer">zp.fudan.edu.cn</a>（需登录）。</li>
+            <li>外文学院：<button class="copy" data-copy="fdwwhr@fudan.edu.cn">fdwwhr@fudan.edu.cn</button> / 021-65642690。</li>
             <li>关注公众号：复旦大学、复旦人事、复旦大学英语教学部。</li>
             <li>以最新公告为准，本页仅做汇总。</li>
           </ol>
         </div>
-        <div class="card src" style="margin-top:12px">
+        <div class="card src">
           <h3>官方源</h3>
           <ol>
-            <li><a href="https://dfll.fudan.edu.cn/27751/list.htm" target="_blank">外文学院·通知公告</a></li>
-            <li><a href="https://cec.fudan.edu.cn/23080/list.htm" target="_blank">大英部·通知公告</a></li>
-            <li><a href="https://hr.fudan.edu.cn/15364/list.htm" target="_blank">人事处·教学科研</a></li>
-            <li><a href="https://hr.fudan.edu.cn/15369/list.htm" target="_blank">人事处·博士后</a></li>
-            <li><a href="https://zp.fudan.edu.cn" target="_blank">人才招聘系统</a></li>
+            <li><a href="https://dfll.fudan.edu.cn/27751/list.htm" target="_blank" rel="noreferrer">外文学院·通知公告</a></li>
+            <li><a href="https://cec.fudan.edu.cn/23080/list.htm" target="_blank" rel="noreferrer">大英部·通知公告</a></li>
+            <li><a href="https://hr.fudan.edu.cn/15364/list.htm" target="_blank" rel="noreferrer">人事处·教学科研</a></li>
+            <li><a href="https://hr.fudan.edu.cn/15369/list.htm" target="_blank" rel="noreferrer">人事处·博士后</a></li>
+            <li><a href="https://hr.fudan.edu.cn/15370/list.htm" target="_blank" rel="noreferrer">人事处·派遣制</a></li>
+            <li><a href="https://zp.fudan.edu.cn" target="_blank" rel="noreferrer">人才招聘系统</a></li>
           </ol>
+        </div>
+        <div class="card">
+          <h3>推送</h3>
+          <ul>
+            <li>每日 08:00 / 20:00（上海） GitHub Actions 自动抓取</li>
+            <li>每日 08:00 Grok 循检并发邮件 / App 通知</li>
+            <li>高优先新岗写入 Notion 并开 GitHub Issue</li>
+          </ul>
         </div>
       </aside>
     </div>
   </main>
+  <footer>数据仅来自复旦官网公开栏目。联系方式以公告正文为准。</footer>
   <script>
-    const FALLBACK = { updatedAt: "—", jobs: [] };
-    let DATA = FALLBACK, filter = "all";
+    const SEED = {
+      updatedAt: "2026-09-06T22:46:45+08:00",
+      jobs: [
+        {id:"dfll-c27751a778446", title:"复旦大学外国语言文学学院教师招聘启事", source:"dfll", sourceLabel:"外文学院", url:"https://dfll.fudan.edu.cn/e0/ce/c27751a778446/page.htm", publishedAt:"2026-05-06", deadline:"2026-12-31", priority:"high", isRecruitment:true, isNew:false, degree:"phd", contactName:"郑老师", contactEmail:"fdwwhr@fudan.edu.cn", contactPhone:"021-65642690", summary:"助理教授 B 岗。法文/韩文/西语/日文系，数字人文与区域国别学。世界一流大学博士，年龄一般≤35。邮件注明「应聘系别+姓名」。"},
+        {id:"dfll-c27751a748366", title:"外国语言文学博士后科研流动站2025年度博士后招聘启事（下半年）", source:"dfll", sourceLabel:"外文学院", url:"https://dfll.fudan.edu.cn/6b/4e/c27751a748366/page.htm", publishedAt:"2025-09-22", priority:"high", isRecruitment:true, isNew:false, degree:"phd", summary:"外文学院博士后流动站下半年招聘。请以官网正文为准。"},
+        {id:"cec-watch", title:"大英部通知公告·暂无教师招聘（持续监测）", source:"cec", sourceLabel:"大英部", url:"https://cec.fudan.edu.cn/23080/list.htm", publishedAt:"2026-09-05", priority:"high", isRecruitment:true, isNew:false, summary:"近期公告为考试、赛事与学术活动，暂无教师/博士后招聘。系统仍会定时循检。建议同步关注公众号「复旦大学英语教学部」。"},
+        {id:"hr-dispatch-c15370a788054", title:"国际交流文化学院招聘招生管理助理岗位1名", source:"hr-dispatch", sourceLabel:"人事处-派遣制", url:"https://hr.fudan.edu.cn/06/56/c15370a788054/page.htm", publishedAt:"2026-08-14", priority:"mid", isRecruitment:true, isNew:false, summary:"国际交流相关行政岗，列为中优先。"},
+        {id:"hr-postdoc-c15369a789065", title:"复旦大学中国研究院博士后招聘启事", source:"hr-postdoc", sourceLabel:"人事处-博士后", url:"https://hr.fudan.edu.cn/0a/49/c15369a789065/page.htm", publishedAt:"2026-08-31", priority:"mid", isRecruitment:true, isNew:false, degree:"phd", summary:"中国研究院博士后，可能涉及区域国别。"},
+        {id:"hr-faculty-c15364a787635", title:"环境科学与工程系招聘1名助理教授B", source:"hr-faculty", sourceLabel:"人事处-教学科研", url:"https://hr.fudan.edu.cn/04/b3/c15364a787635/page.htm", publishedAt:"2026-08-05", priority:"low", isRecruitment:true, isNew:false, degree:"phd", summary:"请点击标题查看官方公告正文。"},
+        {id:"hr-postdoc-c15369a789633", title:"复旦大学彭慧胜院士团队招聘物理相关背景博士后", source:"hr-postdoc", sourceLabel:"人事处-博士后", url:"https://hr.fudan.edu.cn/0c/81/c15369a789633/page.htm", publishedAt:"2026-09-03", priority:"low", isRecruitment:true, isNew:false, degree:"phd", summary:"请点击标题查看官方公告正文。"},
+        {id:"hr-dispatch-c15370a789762", title:"复杂性状的遗传调控全国重点实验室招聘高强课题组科研助理岗位1名", source:"hr-dispatch", sourceLabel:"人事处-派遣制", url:"https://hr.fudan.edu.cn/0d/02/c15370a789762/page.htm", publishedAt:"2026-09-04", priority:"low", isRecruitment:true, isNew:false, summary:"请点击标题查看官方公告正文。"},
+        {id:"hr-dispatch-c15370a789569", title:"先进材料实验室招聘实验室管理与项目处理岗位1名", source:"hr-dispatch", sourceLabel:"人事处-派遣制", url:"https://hr.fudan.edu.cn/0c/41/c15370a789569/page.htm", publishedAt:"2026-09-03", priority:"low", isRecruitment:true, isNew:false, summary:"请点击标题查看官方公告正文。"},
+        {id:"hr-dispatch-c15370a770739", title:"财务与国有资产管理处招聘财务管理岗位4名", source:"hr-dispatch", sourceLabel:"人事处-派遣制", url:"https://hr.fudan.edu.cn/c2/b3/c15370a770739/page.htm", publishedAt:"2026-09-02", priority:"low", isRecruitment:true, isNew:false, summary:"请点击标题查看官方公告正文。"},
+        {id:"hr-admin-c15366a788817", title:"未来信息创新学院招聘党政管理人员1名", source:"hr-admin", sourceLabel:"人事处-党政管理", url:"https://hr.fudan.edu.cn/09/51/c15366a788817/page.htm", publishedAt:"2026-08-27", priority:"low", isRecruitment:true, isNew:false, summary:"请点击标题查看官方公告正文。"}
+      ]
+    };
+    let DATA = SEED, filter = "all";
+    const saved = new Set(JSON.parse(localStorage.getItem("fjw-saved") || "[]"));
     const $ = (id) => document.getElementById(id);
     const priLabel = { high: "高-对口", mid: "中-相关", low: "低-其他" };
+    const esc = (s) => String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    function daysLeft(d) {
+      if (!d) return "";
+      const n = Math.ceil((new Date(d + "T23:59:59+08:00") - Date.now()) / 86400000);
+      if (n < 0) return "已截止";
+      return "剩 " + n + " 天";
+    }
+    function persist() { localStorage.setItem("fjw-saved", JSON.stringify([...saved])); }
 
     function render() {
       const q = ($("q").value || "").trim().toLowerCase();
       const jobs = DATA.jobs.filter((j) => {
         if (filter === "high" && j.priority !== "high") return false;
+        if (filter === "mid" && j.priority !== "mid") return false;
+        if (filter === "saved" && !saved.has(j.id)) return false;
         if (["dfll","cec","hr-faculty","hr-postdoc"].includes(filter) && j.source !== filter) return false;
         if (!q) return true;
         return JSON.stringify(j).toLowerCase().includes(q);
       });
-      $("nAll").textContent = DATA.jobs.filter(j => j.isRecruitment !== false).length;
-      $("nHigh").textContent = DATA.jobs.filter(j => j.priority === "high" && j.isRecruitment !== false).length;
-      $("nNew").textContent = DATA.jobs.filter(j => j.isNew).length;
+      $("nAll").textContent = DATA.jobs.length;
+      $("nHigh").textContent = DATA.jobs.filter(j => j.priority === "high").length;
+      $("nSaved").textContent = saved.size;
       $("nUpdated").textContent = (DATA.updatedAt || "—").slice(0, 16).replace("T", " ");
+      const focus = DATA.jobs.find(j => j.id === "dfll-c27751a778446");
+      if (focus) {
+        $("focus").innerHTML = "<strong>当前对口重点：</strong>外文学院教师招聘截止 <strong>" + esc(focus.deadline) + "</strong>（" + daysLeft(focus.deadline) + "）· 法/韩/西/日· 助理教授B · <a href=\"" + esc(focus.url) + "\" target=\"_blank\" rel=\"noreferrer\">看公告</a>";
+      }
       if (!jobs.length) {
         $("list").innerHTML = '<div class="empty card">当前筛选下没有岗位。大英部若暂无招聘，系统仍会定时循检。</div>';
         return;
       }
       $("list").innerHTML = jobs.map((j) => `
-        <article class="card ${j.priority || "low"}">
+        <article class="card ${esc(j.priority || "low")}">
           <div class="meta">
-            <span class="tag ${j.priority}">${priLabel[j.priority] || j.priority}</span>
-            <span class="tag">${j.sourceLabel || j.source}</span>
+            <span class="tag ${esc(j.priority)}">${priLabel[j.priority] || j.priority}</span>
+            <span class="tag">${esc(j.sourceLabel || j.source)}</span>
             ${j.isNew ? '<span class="tag new">新</span>' : ""}
             ${j.degree === "phd" ? '<span class="tag">博士</span>' : ""}
-            <span>${j.publishedAt || "日期待确认"}</span>
+            <span>${esc(j.publishedAt || "日期待确认")}</span>
+            <button class="star ${saved.has(j.id) ? "on" : ""}" data-id="${esc(j.id)}" title="收藏">${saved.has(j.id) ? "★" : "☆"}</button>
           </div>
-          <h2 class="job"><a href="${j.url}" target="_blank" rel="noreferrer">${j.title}</a></h2>
-          <p class="sum">${j.summary || "请点击标题查看官方公告正文。"}</p>
+          <h2 class="job"><a href="${esc(j.url)}" target="_blank" rel="noreferrer">${esc(j.title)}</a></h2>
+          <p class="sum">${esc(j.summary || "请点击标题查看官方公告正文。")}</p>
           <div class="foot">
-            <span>${j.deadline ? "截止 " + j.deadline : "截止日期见正文"}</span>
-            <span>${[j.contactName, j.contactEmail, j.contactPhone].filter(Boolean).join(" · ") || "联系方式见公告"}</span>
+            <span>${j.deadline ? "截止 " + esc(j.deadline) + " · " + daysLeft(j.deadline) : "截止日期见正文"}</span>
+            <span>${esc([j.contactName, j.contactEmail, j.contactPhone].filter(Boolean).join(" · ") || "联系方式见公告")}</span>
           </div>
         </article>`).join("");
+      document.querySelectorAll(".star").forEach((btn) => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          if (saved.has(id)) saved.delete(id); else saved.add(id);
+          persist(); render();
+        };
+      });
     }
 
     document.querySelectorAll(".chip").forEach((btn) => {
@@ -178,9 +230,26 @@
       };
     });
     $("q").addEventListener("input", render);
+    document.querySelectorAll(".copy").forEach((btn) => {
+      btn.onclick = () => navigator.clipboard.writeText(btn.dataset.copy).then(() => { btn.textContent = "已复制"; setTimeout(() => btn.textContent = btn.dataset.copy, 1200); });
+    });
 
-    fetch("./data/jobs.json").then((r) => r.json()).then((d) => { DATA = d; render(); })
-      .catch(() => render());
+    const urls = ["./data/jobs.json", "https://cdn.jsdelivr.net/gh/tianshesanlang/fudan-job-watch@main/data/jobs.json"];
+    (async () => {
+      for (const u of urls) {
+        try {
+          const r = await fetch(u, { cache: "no-store" });
+          if (!r.ok) continue;
+          const d = await r.json();
+          if (d && Array.isArray(d.jobs) && d.jobs.length) {
+            const seedMap = Object.fromEntries(SEED.jobs.map(j => [j.id, j]));
+            d.jobs = d.jobs.map(j => ({ ...j, ...(seedMap[j.id] || {}) , title: (j.title || "").replace(/\s*20\d{2}-\d{2}-\d{2}\s*$/, "") }));
+            DATA = d; break;
+          }
+        } catch (e) {}
+      }
+      render();
+    })();
   </script>
 </body>
 </html>
