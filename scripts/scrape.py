@@ -13,14 +13,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TZ = timezone(timedelta(hours=8))
 CTX = ssl.create_default_context()
-UA = "Mozilla/5.0 (compatible; FudanJobWatch/1.0; +https://github.com/tianshesanlang/fudan-job-watch)"
+UA = "Mozilla/5.0 (compatible; FudanJobWatch/1.1; +https://github.com/tianshesanlang/fudan-job-watch)"
 
 ITEM_RE = re.compile(
+    r'<li[^>]*>\s*<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>(.*?)</li>',
+    re.I | re.S,
+)
+FALLBACK_RE = re.compile(
     r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
     re.I | re.S,
 )
 DATE_RE = re.compile(r"(20\d{2}-\d{2}-\d{2})")
 TAG_RE = re.compile(r"<[^>]+>")
+TRAIL_DATE_RE = re.compile(r"\s*20\d{2}-\d{2}-\d{2}\s*$")
 
 
 def load_json(path: Path, default):
@@ -52,28 +57,34 @@ def abs_url(base: str, href: str) -> str:
 
 
 def clean(text: str) -> str:
-    text = TAG_RE.sub("", unescape(text))
-    return re.sub(r"\s+", " ", text).strip()
+    text = TAG_RE.sub("", unescape(text or ""))
+    text = re.sub(r"\s+", " ", text).strip()
+    return TRAIL_DATE_RE.sub("", text).strip()
 
 
 def parse_list(html: str, page_url: str) -> list[dict]:
     items = []
     seen = set()
-    for m in ITEM_RE.finditer(html):
-        href, inner = m.group(1), m.group(2)
+
+    def add(href: str, inner: str, extra: str = "") -> None:
         if "page.htm" not in href and "page.psp" not in href:
-            continue
+            return
         title = clean(inner)
         if len(title) < 6:
-            continue
+            return
         url = abs_url(page_url, href)
         if url in seen:
-            continue
+            return
         seen.add(url)
-        window = html[m.end() : m.end() + 280]
-        dm = DATE_RE.search(window) or DATE_RE.search(title)
-        published = dm.group(1) if dm else None
-        items.append({"title": title, "url": url, "publishedAt": published})
+        blob = f"{inner} {extra}"
+        dm = DATE_RE.search(blob) or DATE_RE.search(title)
+        items.append({"title": title, "url": url, "publishedAt": dm.group(1) if dm else None})
+
+    for m in ITEM_RE.finditer(html):
+        add(m.group(1), m.group(2), m.group(3))
+    if len(items) < 3:
+        for m in FALLBACK_RE.finditer(html):
+            add(m.group(1), m.group(2), html[m.end() : m.end() + 240])
     return items
 
 
@@ -88,8 +99,6 @@ def priority_of(title: str, source: dict, cfg: dict) -> str:
         return "high"
     if hit(title, cfg["keywordsMid"]):
         return "mid"
-    if source.get("kind") == "notice" and not hit(title, cfg["keywordsRecruitment"]):
-        return "high" if source["id"] in {"dfll", "cec"} else "low"
     return source.get("priorityDefault", "low")
 
 
@@ -102,8 +111,8 @@ def main() -> None:
     cfg = load_json(ROOT / "sources.json", {})
     prev = load_json(ROOT / "data" / "jobs.json", {"jobs": []})
     old = {j["id"]: j for j in prev.get("jobs", [])}
+    merged = {k: {**v, "isNew": False} for k, v in old.items()}
     new_high = []
-    merged = {}
     pages_ok = 0
 
     for source in cfg.get("sources", []):
@@ -129,6 +138,7 @@ def main() -> None:
             jid = f"{source['id']}-{job_id(it['url'])}"
             old_row = old.get(jid, {})
             pri = priority_of(title, source, cfg)
+            is_new = jid not in old
             row = {
                 **old_row,
                 "id": jid,
@@ -139,22 +149,22 @@ def main() -> None:
                 "publishedAt": it["publishedAt"] or old_row.get("publishedAt"),
                 "priority": pri,
                 "isRecruitment": True,
-                "isNew": jid not in old,
+                "isNew": is_new,
             }
             merged[jid] = row
-            if row["isNew"] and pri == "high":
+            if is_new and pri == "high":
                 new_high.append(row)
 
     jobs = sorted(
         merged.values(),
         key=lambda j: (j.get("publishedAt") or "", j["id"]),
         reverse=True,
-    )
+    )[:300]
     out = {
         "updatedAt": datetime.now(TZ).strftime("%Y-%m-%dT%H:%M:%S+08:00"),
         "pagesFetched": pages_ok,
         "newHighCount": len(new_high),
-        "jobs": jobs[:200],
+        "jobs": jobs,
     }
     (ROOT / "data").mkdir(exist_ok=True)
     (ROOT / "data" / "jobs.json").write_text(
@@ -164,7 +174,9 @@ def main() -> None:
     if new_high:
         lines = ["# 新的高优先级招聘\n"]
         for j in new_high:
-            lines.append(f"- **{j['title']}** · {j['sourceLabel']} · {j.get('publishedAt') or ''} · {j['url']}")
+            lines.append(
+                f"- **{j['title']}** · {j['sourceLabel']} · {j.get('publishedAt') or ''} · {j['url']}"
+            )
         alert.write_text("\n".join(lines) + "\n", encoding="utf-8")
     elif alert.exists():
         alert.unlink()
