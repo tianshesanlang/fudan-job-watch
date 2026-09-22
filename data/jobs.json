@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-09-22T01:40:53+08:00",
+  "updatedAt": "2026-09-22T10:53:39+08:00",
   "pagesFetched": 16,
-  "newHighCount": 1,
+  "newHighCount": 0,
   "jobs": [
     {
       "id": "hr-support-c15365a791816",
@@ -12,7 +12,7 @@
       "publishedAt": "2026-09-21",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-support-c15365a791807",
@@ -23,7 +23,7 @@
       "publishedAt": "2026-09-21",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-support-c15365a791779",
@@ -34,7 +34,7 @@
       "publishedAt": "2026-09-21",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a777132",
@@ -45,7 +45,7 @@
       "publishedAt": "2026-09-21",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "dfll-c27751a792119",
@@ -56,7 +56,7 @@
       "publishedAt": "2026-09-21",
       "priority": "high",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-postdoc-c15369a791590",
@@ -67,7 +67,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-postdoc-c15369a791589",
@@ -78,7 +78,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791617",
@@ -89,7 +89,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791615",
@@ -100,7 +100,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791611",
@@ -111,7 +111,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791605",
@@ -122,7 +122,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791602",
@@ -133,7 +133,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791597",
@@ -144,7 +144,7 @@
       "publishedAt": "2026-09-18",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a791459",
@@ -155,7 +155,7 @@
       "publishedAt": "2026-09-17",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-support-c15365a783731",
@@ -166,7 +166,7 @@
       "publishedAt": "2026-09-15",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-faculty-c15364a790577",
@@ -177,7 +177,7 @@
       "publishedAt": "2026-09-11",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a790607",
@@ -188,7 +188,7 @@
       "publishedAt": "2026-09-11",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a790175",
@@ -199,7 +199,7 @@
       "publishedAt": "2026-09-08",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a790133",
@@ -210,7 +210,7 @@
       "publishedAt": "2026-09-08",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a790072",
@@ -221,7 +221,7 @@
       "publishedAt": "2026-09-08",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     },
     {
       "id": "hr-dispatch-c15370a789762",
@@ -1234,7 +1234,7 @@
       "publishedAt": "2022-09-15",
       "priority": "low",
       "isRecruitment": true,
-      "isNew": true
+      "isNew": false
     }
   ]
 }
